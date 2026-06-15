@@ -1,5 +1,7 @@
 # HK Flow Tape
 
+[中文说明](README.zh-CN.md)
+
 港股资金盘面判读 Codex Skill，用来把南向资金、ADR、ETF、沽空和 SFC 可申报空头仓位拆开看，避免把“净额、成交额、全市场成交额、沽空比例”混成一个信号。
 
 ## What It Does
