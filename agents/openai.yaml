@@ -1,0 +1,4 @@
+interface:
+  display_name: "港股资金判读"
+  short_description: "南向、沽空、ADR与资金右侧识别框架"
+  default_prompt: "Use $hk-flow-tape to judge whether my Hong Kong holdings have flow-side confirmation."
