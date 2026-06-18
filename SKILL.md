@@ -45,7 +45,29 @@ For live or recent market facts, verify before concluding. Prefer these sources:
 Use bundled scripts when helpful:
 
 - `scripts/southbound_top10.py` fetches Eastmoney 港股通沪/深十大成交活跃股 and aggregates by code.
+- `scripts/southbound_signal_scan.py` scans several recent trading days and flags emerging southbound right-side candidates.
 - `scripts/sfc_short_positions.py` fetches and summarizes SFC aggregated reportable short positions.
+
+### Missed-Signal Prevention
+
+When the user asks about broad Hong Kong market flow, sector rotation, or "港股资金情况", do not only analyze the index or named holdings. Also scan the latest complete 3-5 trading days of southbound top-10 active stocks and proactively surface **new right-side candidates**, even if the user did not name them.
+
+Flag a candidate when most of these are true:
+
+- It appears in the 港股通沪/深 top-10 active lists for at least 3 recent sessions.
+- It has positive aggregated 沪+深 net buy on at least 3 sessions.
+- Cumulative southbound net buy is large, usually above HKD 10bn across the scan window.
+- Average direction strength is above 15%.
+- Both 沪 and 深 channels participate, or one channel buys with unusually large size.
+- Price is breaking out but not yet in a clearly crowded acceleration stage.
+
+Classify the signal:
+
+- **右侧早期**: 2-3 positive sessions, cumulative net buy large, price not yet vertical. This must be highlighted as a watch/buy-on-pullback candidate.
+- **右侧确认**: 3-5 positive sessions, strong direction strength, price confirms breakout. Give a concrete entry plan, not a vague mention.
+- **拥挤加速**: after a very large multi-day rise or abnormal single-day volume, warn against emotional chasing even if southbound is still buying.
+
+This rule exists to avoid missing signals like 01888 建滔积层板 in June 2026: it showed repeated southbound top-10 appearances and positive direction before the final acceleration. Such names must be proactively surfaced.
 
 ### 3. Keep Data Meanings Separate
 
@@ -70,7 +92,8 @@ Use this order:
 4. **Short-sale pressure**: short amount, ratio, deviation; judge pressure vs covering potential.
 5. **Weekly net short**: SFC trend, crowding, and whether data is stale.
 6. **ETF/passive**: index ETF connect flow and benchmark move.
-7. **Conclusion**: right-side, left-side, divergent, squeeze-prone, or weak rebound only.
+7. **New candidates**: scan recent southbound top-10 flow for emerging right-side candidates outside the named holdings.
+8. **Conclusion**: right-side, left-side, divergent, squeeze-prone, or weak rebound only.
 
 ### 5. Interpret Common Patterns
 

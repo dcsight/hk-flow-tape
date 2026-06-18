@@ -62,6 +62,15 @@ The script fetches Eastmoney `RPT_MUTUAL_TOP10DEAL` and aggregates 港股通(沪
 
 Coverage note: this source only covers daily top-10 active stocks per channel. If a stock is missing, it is not covered by this source; that is not the same as zero flow.
 
+### Southbound Right-Side Signal Scan
+
+```bash
+python3 scripts/southbound_signal_scan.py \
+  --dates 2026-06-09 2026-06-10 2026-06-11 2026-06-12
+```
+
+The scan flags stocks repeatedly appearing in southbound top-10 active lists with sustained positive net buying. It is a guardrail against missing emerging flow-side candidates before the final acceleration.
+
 ### SFC Reportable Short Positions
 
 ```bash
